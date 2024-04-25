@@ -1,6 +1,6 @@
 package com.standard.multiviewtyperecyclerview.data.database
 
-import com.standard.multiviewtyperecyclerview.data.model.BlueCardEntity
+import com.standard.multiviewtyperecyclerview.data.entity.BlueCardEntity
 import com.standard.multiviewtyperecyclerview.presentation.main.MultiViewEnum
 
 fun cardList() : List<BlueCardEntity> {

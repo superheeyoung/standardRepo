@@ -1,4 +1,4 @@
-package com.standard.multiviewtyperecyclerview.data.model
+package com.standard.multiviewtyperecyclerview.data.entity
 
 import com.standard.multiviewtyperecyclerview.presentation.main.MultiViewEnum
 
