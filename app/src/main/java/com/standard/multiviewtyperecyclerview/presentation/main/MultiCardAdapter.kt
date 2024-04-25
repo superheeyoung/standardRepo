@@ -1,32 +1,36 @@
-package com.standard.multiviewtyperecyclerview.presentation
+package com.standard.multiviewtyperecyclerview.presentation.main
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.standard.multiviewtyperecyclerview.data.Card
 import com.standard.multiviewtyperecyclerview.databinding.ItemBlueCardBinding
 import com.standard.multiviewtyperecyclerview.databinding.ItemLightBlueCardBinding
 import com.standard.multiviewtyperecyclerview.databinding.ItemOrangeCardBinding
+import com.standard.multiviewtyperecyclerview.databinding.UnknownItemBinding
+import com.standard.multiviewtyperecyclerview.presentation.model.BlueCardModel
 import java.lang.IllegalArgumentException
 
 //클릭 이벤트 처리 람다함수 파라메터로 사용
-class MultiCardAdapter(private val onClick: (Card) -> Unit) :
+class MultiCardAdapter(private val onClick: (BlueCardModel) -> Unit) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    var cardList = listOf<Card>()
+    var cardList = listOf<BlueCardModel>()
 
     //viewholder 생성
     //ViewHolder에 연결된 view 생성, 초기화
     //multi view type 처리
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         //multi view type을 구현하는 item layout 연결
-        return when (viewType) {
-            MultiViewEnum.BLUE.viewType -> {
+        //enum ordinal값 사용 보단 enum의 entries(enum의 list를 뽑아서 return)를 뽑아서 사용
+        //sealed class
+        val MuiltiViewType = MultiViewEnum.entries.find { it.viewType == viewType }
+        return when (MuiltiViewType) {
+            MultiViewEnum.BLUE -> {
                 val binding =
                     ItemBlueCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
                 BlueTypeViewHolder(binding)
             }
 
-            MultiViewEnum.LIGHTBLUE.viewType -> {
+            MultiViewEnum.LIGHTBLUE -> {
                 val binding =
                     ItemLightBlueCardBinding.inflate(
                         LayoutInflater.from(parent.context),
@@ -36,7 +40,7 @@ class MultiCardAdapter(private val onClick: (Card) -> Unit) :
                 LightBlueTypeViewHolder(binding)
             }
 
-            MultiViewEnum.ORANGE.viewType -> {
+            MultiViewEnum.ORANGE -> {
                 val binding =
                     ItemOrangeCardBinding.inflate(
                         LayoutInflater.from(parent.context),
@@ -46,7 +50,15 @@ class MultiCardAdapter(private val onClick: (Card) -> Unit) :
                 OrangeTypeViewHolder(binding)
             }
 
-            else -> throw IllegalArgumentException("Invalid view type")
+            else -> {
+                val binding =
+                    UnknownItemBinding.inflate(
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false
+                    )
+                UnknownViewHolder(binding)
+            }
         }
     }
 
@@ -58,8 +70,8 @@ class MultiCardAdapter(private val onClick: (Card) -> Unit) :
     //클릭 이벤트 처리
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val currentItem = cardList[position]
-        when (holder.itemViewType) {
-            MultiViewEnum.BLUE.viewType -> {
+        when (holder) {
+            is BlueTypeViewHolder -> {
                 val blueHolder = holder as BlueTypeViewHolder
                 blueHolder.bind(currentItem)
 
@@ -68,7 +80,7 @@ class MultiCardAdapter(private val onClick: (Card) -> Unit) :
                 }
             }
 
-            MultiViewEnum.LIGHTBLUE.viewType -> {
+            is LightBlueTypeViewHolder -> {
                 val lightBlueHolder = holder as LightBlueTypeViewHolder
                 lightBlueHolder.bind(currentItem)
 
@@ -77,7 +89,7 @@ class MultiCardAdapter(private val onClick: (Card) -> Unit) :
                 }
             }
 
-            MultiViewEnum.ORANGE.viewType -> {
+            is OrangeTypeViewHolder -> {
                 val orangeHolder = holder as OrangeTypeViewHolder
                 orangeHolder.bind(currentItem)
 
@@ -91,18 +103,13 @@ class MultiCardAdapter(private val onClick: (Card) -> Unit) :
     //아이템의 위치(position)에 따라 어떤 뷰 타입을 가져야하는지 결정
     //position 즉 아이템의 위치에 접근하여 아이템의 뷰타입 결정
     override fun getItemViewType(position: Int): Int {
-        return when (position) {
-            0 -> MultiViewEnum.BLUE.viewType
-            1 -> MultiViewEnum.LIGHTBLUE.viewType
-            2 -> MultiViewEnum.ORANGE.viewType
-            else -> throw IllegalArgumentException("Invalid position")
-        }
+        return cardList[position].cardViewType.viewType
     }
 
     //item layout의 ui값 뿌려주기
     class BlueTypeViewHolder(private val binding: ItemBlueCardBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(card: Card) {
+        fun bind(card: BlueCardModel) {
             binding.apply {
                 tvUserName.text = card.userName
                 tvCardNum.text = card.cardNumber
@@ -116,7 +123,7 @@ class MultiCardAdapter(private val onClick: (Card) -> Unit) :
 
     class LightBlueTypeViewHolder(private val binding: ItemLightBlueCardBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(card: Card) {
+        fun bind(card: BlueCardModel) {
             binding.apply {
                 tvUserName.text = card.userName
                 tvCardNum.text = card.cardNumber
@@ -130,7 +137,7 @@ class MultiCardAdapter(private val onClick: (Card) -> Unit) :
 
     class OrangeTypeViewHolder(private val binding: ItemOrangeCardBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(card: Card) {
+        fun bind(card: BlueCardModel) {
             binding.apply {
                 tvUserName.text = card.userName
                 tvCardNum.text = card.cardNumber
@@ -140,5 +147,11 @@ class MultiCardAdapter(private val onClick: (Card) -> Unit) :
                 tvCardManager.text = card.cardManager
             }
         }
+    }
+
+    class UnknownViewHolder(
+        binding: UnknownItemBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
+        fun bind() = Unit
     }
 }

@@ -1,12 +1,10 @@
-package com.standard.multiviewtyperecyclerview.data
+package com.standard.multiviewtyperecyclerview.data.model
 
-import android.os.Parcelable
-import com.standard.multiviewtyperecyclerview.presentation.MultiViewEnum
-import kotlinx.android.parcel.Parcelize
+import com.standard.multiviewtyperecyclerview.presentation.main.MultiViewEnum
 
 //@Parcelize 키워드 사용 시 build gradle 추가
-@Parcelize
-data class Card(
+
+data class BlueCardEntity(
     val userName: String,
     val cardNumber: String,
     val cardType: String,
@@ -14,4 +12,4 @@ data class Card(
     val balance: Double,
     val cardManager: String,
     val cardViewType : MultiViewEnum
-) : Parcelable
+)
