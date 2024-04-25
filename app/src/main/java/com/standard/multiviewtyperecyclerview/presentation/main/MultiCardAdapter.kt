@@ -149,6 +149,7 @@ class MultiCardAdapter(private val onClick: (BlueCardModel) -> Unit) :
         }
     }
 
+    //Enum외의 data가 왔을 때(server or android 개발자) 대응
     class UnknownViewHolder(
         binding: UnknownItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {

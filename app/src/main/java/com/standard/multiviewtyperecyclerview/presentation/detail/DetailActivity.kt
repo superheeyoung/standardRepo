@@ -25,7 +25,6 @@ class DetailActivity : AppCompatActivity() {
         initView()
     }
 
-    //TODO recyclerview 다시 확인
     private fun initView() {
         binding.detailName.text = bludCardModel?.userName
         binding.detailCardNum.text = bludCardModel?.cardNumber

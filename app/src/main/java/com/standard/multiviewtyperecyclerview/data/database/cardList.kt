@@ -3,6 +3,7 @@ package com.standard.multiviewtyperecyclerview.data.database
 import com.standard.multiviewtyperecyclerview.data.entity.BlueCardEntity
 import com.standard.multiviewtyperecyclerview.presentation.main.MultiViewEnum
 
+//network or cache data로 변경될 예정
 fun cardList() : List<BlueCardEntity> {
     return listOf(
         BlueCardEntity(

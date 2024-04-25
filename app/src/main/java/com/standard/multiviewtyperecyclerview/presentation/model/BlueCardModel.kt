@@ -4,6 +4,7 @@ import android.os.Parcelable
 import com.standard.multiviewtyperecyclerview.presentation.main.MultiViewEnum
 import kotlinx.android.parcel.Parcelize
 
+//bundle로 보내기 위하여 parcelize 추가
 @Parcelize
 data class BlueCardModel(
     val userName: String,
