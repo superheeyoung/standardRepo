@@ -12,7 +12,11 @@ import com.standard.multiviewtyperecyclerview.presentation.repository.SearchRepo
 
 class MainViewModel(private val searchRepository: SearchRepository) : ViewModel() {
 
+    //liveData를 외부에서 수정할 수 없도록 하고, ViewModel을 통해서만 데이터를 업데이트 하고 observing 하도록 함
+    //실제 데이터를 저장하고 있는 MutableLiveData
+    //_getBlueCardModel을 private로 선언함으로써, ViewModel외부에서 이 데이터를 직접적으로 접근할 수 없음
     private val _getBlueCardModel : MutableLiveData<List<BlueCardModel>> = MutableLiveData()
+    //_getBlueCardModel의 public getter()이며 외부에서 liveData를 읽을 수 있는 접근자
     val getBlueCardModel : LiveData<List<BlueCardModel>> get() = _getBlueCardModel
 
     fun getBlueCardModel() {

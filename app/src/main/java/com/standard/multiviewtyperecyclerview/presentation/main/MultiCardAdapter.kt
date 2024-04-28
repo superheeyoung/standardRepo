@@ -15,6 +15,7 @@ class MultiCardAdapter(private val onClick: (BlueCardModel) -> Unit) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     var cardList = listOf<BlueCardModel>()
 
+    //TODO
     //viewholder 생성
     //ViewHolder에 연결된 view 생성, 초기화
     //multi view type 처리
@@ -68,6 +69,7 @@ class MultiCardAdapter(private val onClick: (BlueCardModel) -> Unit) :
 
     //viewHolder와 data 바인딩
     //클릭 이벤트 처리
+    //TODO
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val currentItem = cardList[position]
         when (holder) {
@@ -100,6 +102,7 @@ class MultiCardAdapter(private val onClick: (BlueCardModel) -> Unit) :
         }
     }
 
+    //TODO
     //아이템의 위치(position)에 따라 어떤 뷰 타입을 가져야하는지 결정
     //position 즉 아이템의 위치에 접근하여 아이템의 뷰타입 결정
     override fun getItemViewType(position: Int): Int {
@@ -149,6 +152,7 @@ class MultiCardAdapter(private val onClick: (BlueCardModel) -> Unit) :
         }
     }
 
+    //TODO
     //Enum외의 data가 왔을 때(server or android 개발자) 대응
     class UnknownViewHolder(
         binding: UnknownItemBinding

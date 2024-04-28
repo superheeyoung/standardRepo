@@ -2,6 +2,7 @@ package com.standard.multiviewtyperecyclerview.data.entity
 
 import com.standard.multiviewtyperecyclerview.presentation.main.MultiViewEnum
 
+//ResponseData, DTO, DAO 등..
 data class BlueCardEntity(
     val userName: String,
     val cardNumber: String,

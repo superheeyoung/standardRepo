@@ -4,6 +4,7 @@ import com.standard.multiviewtyperecyclerview.data.entity.BlueCardEntity
 import com.standard.multiviewtyperecyclerview.presentation.main.MultiViewEnum
 
 //network or cache data로 변경될 예정
+//DTO(서버로 부터 오는 json) or DAO(database)
 fun cardList() : List<BlueCardEntity> {
     return listOf(
         BlueCardEntity(
