@@ -1,10 +1,11 @@
 package com.standard.multiviewtyperecyclerview.data.database
 
-import com.standard.multiviewtyperecyclerview.data.entity.BlueCardEntity
-import com.standard.multiviewtyperecyclerview.presentation.main.MultiViewEnum
+import com.standard.multiviewtyperecyclerview.data.database.model.BlueCardEntity
+import com.standard.multiviewtyperecyclerview.presentation.main.main.MultiViewEnum
 
 //network or cache data로 변경될 예정
 //DTO(서버로 부터 오는 json) or DAO(database)
+//TODO : Room으로 바꿀 예정 (시간 되면)
 fun cardList() : List<BlueCardEntity> {
     return listOf(
         BlueCardEntity(

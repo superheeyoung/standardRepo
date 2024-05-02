@@ -1,4 +1,4 @@
-package com.standard.multiviewtyperecyclerview.presentation.main
+package com.standard.multiviewtyperecyclerview.presentation.main.main
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,8 +7,7 @@ import com.standard.multiviewtyperecyclerview.databinding.ItemBlueCardBinding
 import com.standard.multiviewtyperecyclerview.databinding.ItemLightBlueCardBinding
 import com.standard.multiviewtyperecyclerview.databinding.ItemOrangeCardBinding
 import com.standard.multiviewtyperecyclerview.databinding.UnknownItemBinding
-import com.standard.multiviewtyperecyclerview.presentation.model.BlueCardModel
-import java.lang.IllegalArgumentException
+import com.standard.multiviewtyperecyclerview.presentation.main.model.BlueCardModel
 
 //클릭 이벤트 처리 람다함수 파라메터로 사용
 class MultiCardAdapter(private val onClick: (BlueCardModel) -> Unit) :
@@ -102,7 +101,6 @@ class MultiCardAdapter(private val onClick: (BlueCardModel) -> Unit) :
         }
     }
 
-    //TODO
     //아이템의 위치(position)에 따라 어떤 뷰 타입을 가져야하는지 결정
     //position 즉 아이템의 위치에 접근하여 아이템의 뷰타입 결정
     override fun getItemViewType(position: Int): Int {

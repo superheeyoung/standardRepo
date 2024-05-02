@@ -1,6 +1,6 @@
-package com.standard.multiviewtyperecyclerview.data.entity
+package com.standard.multiviewtyperecyclerview.data.database.model
 
-import com.standard.multiviewtyperecyclerview.presentation.main.MultiViewEnum
+import com.standard.multiviewtyperecyclerview.presentation.main.main.MultiViewEnum
 
 //ResponseData, DTO, DAO 등..
 data class BlueCardEntity(

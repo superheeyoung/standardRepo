@@ -1,13 +1,14 @@
-package com.standard.multiviewtyperecyclerview.presentation.main
+package com.standard.multiviewtyperecyclerview.presentation.main.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.standard.multiviewtyperecyclerview.databinding.ActivityMainBinding
-import com.standard.multiviewtyperecyclerview.presentation.detail.DetailActivity
-import com.standard.multiviewtyperecyclerview.presentation.model.BlueCardModel
+import com.standard.multiviewtyperecyclerview.presentation.main.detail.DetailActivity
+import com.standard.multiviewtyperecyclerview.presentation.main.model.BlueCardModel
 
 class MainActivity : AppCompatActivity() {
 
@@ -45,6 +46,7 @@ class MainActivity : AppCompatActivity() {
             adapter = multiCardAdapter
             layoutManager = LinearLayoutManager(this@MainActivity)
         }
+
     }
 
     private fun initViewModel() {
