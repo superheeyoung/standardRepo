@@ -40,6 +40,8 @@ android {
 }
 
 dependencies {
+    //retrofit
+    implementation(libs.bundles.retrofit)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

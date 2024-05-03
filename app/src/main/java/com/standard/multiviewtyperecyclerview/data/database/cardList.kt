@@ -1,7 +1,4 @@
-package com.standard.flowerrecyclerview.data
-
-import com.standard.multiviewtyperecyclerview.data.Card
-import com.standard.multiviewtyperecyclerview.presentation.MultiViewEnum
+package com.standard.multiviewtyperecyclerview.data.database
 
 fun cardList() : List<Card> {
     return listOf(
@@ -11,8 +8,7 @@ fun cardList() : List<Card> {
             "A Debit Card",
             "21/27",
             3100.30,
-            "Visa",
-            MultiViewEnum.BLUE
+            "Visa"
         ),
         Card(
             "Jimmy",
@@ -20,8 +16,7 @@ fun cardList() : List<Card> {
             "A Prepaid Card",
             "19/25",
             5431.40,
-            "Master",
-            MultiViewEnum.LIGHTBLUE
+            "Master"
         ),
         Card(
             "Hanna",
@@ -29,8 +24,7 @@ fun cardList() : List<Card> {
             "A Credit Card",
             "23/28",
             1030.99,
-            "Union",
-            MultiViewEnum.ORANGE
-        )
+            "Union"
+    )
     )
 }

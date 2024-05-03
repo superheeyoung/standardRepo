@@ -1,6 +1,4 @@
-package com.standard.flowerrecyclerview.data
-
-import com.standard.multiviewtyperecyclerview.data.Card
+package com.standard.multiviewtyperecyclerview.data.database
 
 class DataSource {
     companion object {

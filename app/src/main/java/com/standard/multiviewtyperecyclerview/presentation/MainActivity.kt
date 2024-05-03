@@ -2,10 +2,12 @@ package com.standard.multiviewtyperecyclerview.presentation
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.standard.flowerrecyclerview.data.DataSource
-import com.standard.multiviewtyperecyclerview.data.Card
+import com.standard.multiviewtyperecyclerview.data.database.DataSource
+import com.standard.multiviewtyperecyclerview.data.database.Card
 import com.standard.multiviewtyperecyclerview.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -14,10 +16,8 @@ class MainActivity : AppCompatActivity() {
         ActivityMainBinding.inflate(layoutInflater)
     }
 
-    private val multiCardAdapter : MultiCardAdapter by lazy {
-        MultiCardAdapter { card ->
-            adapterOnClick(card)
-        }
+    private val mainViewModel by viewModels<MainViewModel> {
+        MainViewModelFactory()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,21 +25,13 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
-        val cardList = DataSource.getDataSource().getCardList()
-        multiCardAdapter.cardList = cardList
+        //TODO : editText에서 받아온 data 파라메터로 넣기
+        mainViewModel.getSearchImageList("cindy")
 
-        with(binding.rvItem) {
-            adapter = multiCardAdapter
-            layoutManager = LinearLayoutManager(this@MainActivity)
-        }
-    }
 
-    private fun adapterOnClick(card : Card) {
-        val intent = Intent(this, DetailActivity::class.java)
-        val bundle = Bundle().apply {
-            putParcelable(DetailActivity.EXTRA_CARD, card)
+        mainViewModel.getSearchImageLiveData.observe(this@MainActivity) {
+            //TODO setting RecyclerView
+            Log.d("debugSearchData", it.toString())
         }
-        intent.putExtras(bundle)
-        startActivity(intent)
     }
 }
