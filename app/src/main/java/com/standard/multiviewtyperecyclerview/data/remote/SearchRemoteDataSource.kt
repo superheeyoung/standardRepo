@@ -7,7 +7,8 @@ import retrofit2.http.Query
 import retrofit2.http.QueryMap
 
 interface SearchRemoteDataSource {
-    @Headers("Authorization: KakaoAK 087e584018c0f7bfd2c5e694c504335c")
+    //TODO kakao api key header에 세팅
+    @Headers("Authorization: ")
     @GET("v2/search/image")
     suspend fun getSearch(@Query("query") query:String): SearchResponse
 }
