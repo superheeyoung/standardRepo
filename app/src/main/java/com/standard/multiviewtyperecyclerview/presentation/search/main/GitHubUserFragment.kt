@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,9 +25,11 @@ class GitHubUserFragment : Fragment() {
     }
 
     //선언방식 설명해주기
-    private val sharedViewModel: GitHubUserSharedViewModel by lazy {
+    /*private val sharedViewModel: GitHubUserSharedViewModel by lazy {
         ViewModelProvider(requireActivity())[GitHubUserSharedViewModel::class.java]
-    }
+    }*/
+
+    private val sharedViewModel : GitHubUserSharedViewModel by activityViewModels()
 
     private val gitHubUserAdapter: GitHubUserAdapter by lazy {
         GitHubUserAdapter {
@@ -63,7 +66,7 @@ class GitHubUserFragment : Fragment() {
             }
         }
 
-        gitHubUserViewModel.sharedUserList.observe(viewLifecycleOwner) {
+        gitHubUserViewModel.favoriteUserList.observe(viewLifecycleOwner) {
             sharedViewModel.setFavoriteList(it)
         }
     }

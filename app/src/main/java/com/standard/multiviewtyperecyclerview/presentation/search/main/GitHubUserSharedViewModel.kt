@@ -11,7 +11,8 @@ class GitHubUserSharedViewModel : ViewModel() {
     val favoriteLiveData: LiveData<List<GitHubUserEntity>> = _favoriteLiveData
 
     fun setFavoriteList(list: List<GitHubUserEntity>) {
-        Log.d("debug6666",list.toString())
         _favoriteLiveData.value = list
     }
 }
+
+

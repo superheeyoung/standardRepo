@@ -19,28 +19,31 @@ class GitHubUserViewModel(private val searchRepository: SearchRepository) : View
     private val _getGitHubUserList: MutableLiveData<List<GitHubUserEntity>> = MutableLiveData()
     val getGitHubUserList: LiveData<List<GitHubUserEntity>> get() = _getGitHubUserList
 
-    private val _sharedUserList : MutableLiveData<List<GitHubUserEntity>> = MutableLiveData()
-    val sharedUserList : LiveData<List<GitHubUserEntity>> get() = _sharedUserList
+    private val _favoriteUserList: MutableLiveData<List<GitHubUserEntity>> = MutableLiveData()
+    val favoriteUserList: LiveData<List<GitHubUserEntity>> get() = _favoriteUserList
 
     fun getGitHubUserList() {
         viewModelScope.launch {
-             _getGitHubUserList.value = searchRepository.getGitHubUserList("cindy").items
+            _getGitHubUserList.value = searchRepository.getGitHubUserList("cindy").items
         }
     }
 
-    fun setFavoriteItem(item : GitHubUserEntity) {
-        //TODO 검증 필요 : 백현튜터님께 여쭤보기
+    fun setFavoriteItem(item: GitHubUserEntity) {
         val gitHubUserList = _getGitHubUserList.value!!.toMutableList()
-        val position = gitHubUserList!!.indexOfFirst {
+        val position = gitHubUserList.indexOfFirst {
             it.id == item.id
         }
         //TODO !! 연산자 개선하기
-        _getGitHubUserList.value = gitHubUserList.also {
-            it[position] = item.copy(isFavorite = item.isFavorite.not())
+        _getGitHubUserList.value =
+            gitHubUserList.also {
+                it[position] = item.copy(
+                    isFavorite = item.isFavorite.not()
+                )
+            }
+
+        _favoriteUserList.value = gitHubUserList.filter {
+            it.isFavorite
         }
-
-
-        _sharedUserList.value = _getGitHubUserList.value
     }
 }
 

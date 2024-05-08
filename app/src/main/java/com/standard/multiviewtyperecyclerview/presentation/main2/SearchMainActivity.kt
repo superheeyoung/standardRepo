@@ -25,7 +25,6 @@ class SearchMainActivity : AppCompatActivity() {
         viewPager.adapter = viewPagerAdapter
         viewPager.offscreenPageLimit = viewPagerAdapter.itemCount
 
-        // TabLayout x ViewPager2
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.setText(viewPagerAdapter.getTitle(position))
         }.attach()
