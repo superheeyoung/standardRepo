@@ -2,6 +2,7 @@ package com.standard.multiviewtyperecyclerview.network
 
 import com.standard.multiviewtyperecyclerview.data.remote.remote.SearchRemoteDataSource
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -12,10 +13,12 @@ object RetrofitClient {
 
     //네트워크 요청을 위한 httpClient 구성
     private val okHttpClient by lazy {
+        val interceptor = HttpLoggingInterceptor()
+        interceptor.level = HttpLoggingInterceptor.Level.BODY
         OkHttpClient.Builder()
+            .addNetworkInterceptor(interceptor)
             .build()
     }
-
 
     //retrofit 객체 초기화 및 생성
     private val retrofit by lazy {
@@ -27,7 +30,7 @@ object RetrofitClient {
     }
 
     //Retrofit
-    val searchGitHubUser : SearchRemoteDataSource by lazy {
+    val searchGitHubUser: SearchRemoteDataSource by lazy {
         retrofit.create(SearchRemoteDataSource::class.java)
     }
 }

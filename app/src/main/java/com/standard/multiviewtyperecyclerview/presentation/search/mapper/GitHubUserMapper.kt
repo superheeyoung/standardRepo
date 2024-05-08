@@ -13,7 +13,8 @@ fun List<GitHubUserResponse>.asGitHubUserEntity(): List<GitHubUserEntity> {
     return map {
         GitHubUserEntity(
             it.avatarUrl,
-            it.loginName
+            it.loginName,
+            it.id
         )
     }
 }

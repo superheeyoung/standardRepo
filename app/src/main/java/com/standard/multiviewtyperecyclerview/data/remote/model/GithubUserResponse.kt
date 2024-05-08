@@ -13,5 +13,6 @@ data class GitHubUserListResponse(
 
 data class GitHubUserResponse(
     @SerializedName("avatar_url") val avatarUrl: String,
-    @SerializedName("login") val loginName: String
+    @SerializedName("login") val loginName: String,
+    @SerializedName("id") val id : Int
 )

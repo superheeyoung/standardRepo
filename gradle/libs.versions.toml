@@ -11,6 +11,9 @@ constraintlayout = "2.1.4"
 navigationFragmentKtx = "2.7.7"
 navigationUiKtx = "2.7.7"
 retrofit = "2.11.0"
+okhttp3 = "4.12.0"
+coil = "2.6.0"
+navigation = "2.7.7"
 
 
 [libraries]
@@ -27,8 +30,11 @@ androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation
 # Network & Serialization
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 retrofit-converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
+okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp3"}
+okhttp-logging = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okhttp3"}
 
-
+# Image Loading Library
+coil = { module = "io.coil-kt:coil", version.ref  = "coil"}
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
@@ -37,5 +43,7 @@ jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "k
 [bundles]
 retrofit = [
     "retrofit",
-    "retrofit-converter-gson"
+    "retrofit-converter-gson",
+    "okhttp",
+    "okhttp-logging"
 ]
