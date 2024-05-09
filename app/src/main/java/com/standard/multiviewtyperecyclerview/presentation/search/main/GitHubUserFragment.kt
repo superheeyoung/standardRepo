@@ -24,11 +24,8 @@ class GitHubUserFragment : Fragment() {
         GitHubUserViewModelFactory()
     }
 
-    //선언방식 설명해주기
-    /*private val sharedViewModel: GitHubUserSharedViewModel by lazy {
-        ViewModelProvider(requireActivity())[GitHubUserSharedViewModel::class.java]
-    }*/
-
+    //TODO activityViewModels 확인
+    //activityViewModels() 사용 시 Activity의 라이프사이클에 의해 생존주기 결정되며 액티비티내에서 같은 데이터 공유
     private val sharedViewModel : GitHubUserSharedViewModel by activityViewModels()
 
     private val gitHubUserAdapter: GitHubUserAdapter by lazy {

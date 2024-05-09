@@ -17,7 +17,6 @@ class FavoriteListAdapter :
     class FavoriteUserViewHolder(private val binding: ItemGithubUserBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(gitHubUser: GitHubUserEntity) {
-            Log.d("debug2323",gitHubUser.toString())
             with(binding) {
                 switchFavorite.isChecked = gitHubUser.isFavorite
                 tvUserName.text = gitHubUser.loginName

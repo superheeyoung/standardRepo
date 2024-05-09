@@ -1,4 +1,4 @@
-package com.standard.multiviewtyperecyclerview.presentation.main2
+package com.standard.multiviewtyperecyclerview.presentation.githubmain
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -23,6 +23,7 @@ class SearchMainActivity : AppCompatActivity() {
 
     private fun initView() = with(binding) {
         viewPager.adapter = viewPagerAdapter
+        //viewPager에 화면 수 세팅
         viewPager.offscreenPageLimit = viewPagerAdapter.itemCount
 
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->

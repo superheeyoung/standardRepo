@@ -29,15 +29,20 @@ class GitHubUserViewModel(private val searchRepository: SearchRepository) : View
     }
 
     fun setFavoriteItem(item: GitHubUserEntity) {
+        //toMutableList 수정가능 한 List로 변경
         val gitHubUserList = _getGitHubUserList.value!!.toMutableList()
+
+        //매칭된 아이템의 index를 반환
         val position = gitHubUserList.indexOfFirst {
             it.id == item.id
         }
         //TODO !! 연산자 개선하기
         _getGitHubUserList.value =
+            //livedata에서 받아온 list를 index으로 sorting해서 data class copy함 (data class의 객체를 복사)
             gitHubUserList.also {
                 it[position] = item.copy(
-                    isFavorite = item.isFavorite.not()
+                    //bool 값을 반대값 세팅
+                    isFavorite = !item.isFavorite
                 )
             }
 

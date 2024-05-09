@@ -1,4 +1,4 @@
-package com.standard.multiviewtyperecyclerview.presentation.main2
+package com.standard.multiviewtyperecyclerview.presentation.githubmain
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
