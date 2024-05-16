@@ -1,10 +1,13 @@
-package com.standard.multiviewtyperecyclerview.presentation.githubmain
+package com.standard.multiviewtyperecyclerview.presentation.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.tabs.TabLayoutMediator
 import com.standard.multiviewtyperecyclerview.databinding.SearchMainActivityBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+//Hilt 컴포넌트를 생성 - View(Activity, Fragment), Service, BroadcastReceiver
+@AndroidEntryPoint
 class SearchMainActivity : AppCompatActivity() {
     private val binding: SearchMainActivityBinding by lazy {
         SearchMainActivityBinding.inflate(layoutInflater)

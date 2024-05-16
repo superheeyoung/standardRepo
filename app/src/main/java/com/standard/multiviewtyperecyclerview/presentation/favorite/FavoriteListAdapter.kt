@@ -7,16 +7,15 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.standard.multiviewtyperecyclerview.R
 import com.standard.multiviewtyperecyclerview.databinding.ItemGithubUserBinding
-import com.standard.multiviewtyperecyclerview.presentation.search.main.GitHubUserAdapter
-import com.standard.multiviewtyperecyclerview.presentation.search.model.GitHubUserEntity
+import com.standard.multiviewtyperecyclerview.presentation.search.model.GitHubUser
 
 class FavoriteListAdapter :
     RecyclerView.Adapter<FavoriteListAdapter.FavoriteUserViewHolder>() {
-    var gitHubUserList = listOf<GitHubUserEntity>()
+    var gitHubUserList = listOf<GitHubUser>()
 
     class FavoriteUserViewHolder(private val binding: ItemGithubUserBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(gitHubUser: GitHubUserEntity) {
+        fun bind(gitHubUser: GitHubUser) {
             with(binding) {
                 switchFavorite.isChecked = gitHubUser.isFavorite
                 tvUserName.text = gitHubUser.loginName

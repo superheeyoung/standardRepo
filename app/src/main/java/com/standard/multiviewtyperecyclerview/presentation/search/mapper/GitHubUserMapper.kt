@@ -2,16 +2,16 @@ package com.standard.multiviewtyperecyclerview.presentation.search.mapper
 
 import com.standard.multiviewtyperecyclerview.data.remote.model.GitHubUserListResponse
 import com.standard.multiviewtyperecyclerview.data.remote.model.GitHubUserResponse
-import com.standard.multiviewtyperecyclerview.presentation.search.model.GitHubUserEntity
-import com.standard.multiviewtyperecyclerview.presentation.search.model.GitHubUserListEntity
+import com.standard.multiviewtyperecyclerview.presentation.search.model.GitHubUser
+import com.standard.multiviewtyperecyclerview.presentation.search.model.GitHubUserList
 
-fun GitHubUserListResponse.toEntity() = GitHubUserListEntity(
+fun GitHubUserListResponse.toEntity() = GitHubUserList(
     items = items.asGitHubUserEntity()
 )
 
-fun List<GitHubUserResponse>.asGitHubUserEntity(): List<GitHubUserEntity> {
+fun List<GitHubUserResponse>.asGitHubUserEntity(): List<GitHubUser> {
     return map {
-        GitHubUserEntity(
+        GitHubUser(
             it.avatarUrl,
             it.loginName,
             it.id

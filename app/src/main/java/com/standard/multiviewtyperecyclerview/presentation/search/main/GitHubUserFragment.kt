@@ -11,7 +11,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.standard.multiviewtyperecyclerview.databinding.FragmentGithubSearchUsersBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class GitHubUserFragment : Fragment() {
     companion object {
         fun newInstance() = GitHubUserFragment()
@@ -20,9 +22,7 @@ class GitHubUserFragment : Fragment() {
     private var _binding: FragmentGithubSearchUsersBinding? = null
     private val binding get() = _binding!!
 
-    private val gitHubUserViewModel: GitHubUserViewModel by viewModels {
-        GitHubUserViewModelFactory()
-    }
+    private val gitHubUserViewModel: GitHubUserViewModel by viewModels()
 
     //TODO activityViewModels 확인
     //activityViewModels() 사용 시 Activity의 라이프사이클에 의해 생존주기 결정되며 액티비티내에서 같은 데이터 공유

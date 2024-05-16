@@ -7,14 +7,14 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.standard.multiviewtyperecyclerview.R
 import com.standard.multiviewtyperecyclerview.databinding.ItemGithubUserBinding
-import com.standard.multiviewtyperecyclerview.presentation.search.model.GitHubUserEntity
+import com.standard.multiviewtyperecyclerview.presentation.search.model.GitHubUser
 
 //TODO abstract ViewHolder
 class GitHubUserAdapter(
-    private val onClick: (GitHubUserEntity) -> Unit
+    private val onClick: (GitHubUser) -> Unit
 ) :
     RecyclerView.Adapter<GitHubUserAdapter.GitHubUserViewHolder>() {
-    var gitHubUserList = listOf<GitHubUserEntity>()
+    var gitHubUserList = listOf<GitHubUser>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GitHubUserViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_github_user, parent, false)
@@ -36,10 +36,10 @@ class GitHubUserAdapter(
 
     class GitHubUserViewHolder(
         private val binding: ItemGithubUserBinding,
-        private val onClick: (GitHubUserEntity) -> Unit
+        private val onClick: (GitHubUser) -> Unit
     ) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(gitHubUser: GitHubUserEntity) = with(binding) {
+        fun bind(gitHubUser: GitHubUser) = with(binding) {
             switchFavorite.isChecked = gitHubUser.isFavorite
             tvUserName.text = gitHubUser.loginName
             imgUserAvatar.load(gitHubUser.avatarUrl)

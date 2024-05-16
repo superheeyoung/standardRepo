@@ -11,4 +11,6 @@ interface SearchRemoteDataSource {
         @Query("page") page: Int = 1,
         @Query("per_page") perPage: Int = 100
     ) : GitHubUserListResponse
+
+    //TODO api를 사용하는 function 추가 하면 됨!
 }
