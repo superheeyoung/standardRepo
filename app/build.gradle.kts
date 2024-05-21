@@ -4,6 +4,7 @@ plugins {
     id("kotlin-parcelize")
     alias(libs.plugins.hilt)
     alias(libs.plugins.ksp)
+    kotlin("plugin.serialization")
 }
 
 android {
@@ -63,6 +64,8 @@ dependencies {
 
     // paging3
     implementation(libs.paging.runtime)
+
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
 
 
     implementation(libs.androidx.core.ktx)

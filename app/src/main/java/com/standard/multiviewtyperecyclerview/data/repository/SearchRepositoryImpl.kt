@@ -47,16 +47,14 @@ class SearchRepositoryImpl @Inject constructor(
     override suspend fun getGitHubUserLists(userName: String): Flow<PagingData<GitHubUser>> =
         Pager(
             config = PagingConfig(
-                pageSize = 10,
-                initialLoadSize = 10
+                pageSize = 20
             ),
             remoteMediator = mediator,
             pagingSourceFactory = {
-                SearchPagingRemoteDataSource(userName, remoteDataSource)
+                dataBase.userDao().getAll()
             }
         ).flow.map {
             it.map {
-                Log.d("434434-1",it.toString())
                 it.asGitHubUser()
             }
         }

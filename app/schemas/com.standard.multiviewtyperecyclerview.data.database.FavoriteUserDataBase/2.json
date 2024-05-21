@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "c634e6b36543790a00e7c8d127f00db9",
+    "identityHash": "320de8336f21897523561c0d41d06b9d",
     "entities": [
       {
         "tableName": "FavoriteUserEntity",
@@ -50,7 +50,7 @@
       },
       {
         "tableName": "GitHubUserResponse",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`uid` INTEGER NOT NULL, `avatarUrl` TEXT NOT NULL, `loginName` TEXT NOT NULL, `id` INTEGER NOT NULL, PRIMARY KEY(`uid`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`uid` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `avatarUrl` TEXT NOT NULL, `loginName` TEXT NOT NULL, `id` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "uid",
@@ -78,7 +78,7 @@
           }
         ],
         "primaryKey": {
-          "autoGenerate": false,
+          "autoGenerate": true,
           "columnNames": [
             "uid"
           ]
@@ -110,7 +110,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'c634e6b36543790a00e7c8d127f00db9')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '320de8336f21897523561c0d41d06b9d')"
     ]
   }
 }

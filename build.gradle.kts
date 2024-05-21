@@ -4,4 +4,5 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid) apply false
     alias(libs.plugins.hilt) apply false
     alias(libs.plugins.ksp) apply false
+    kotlin("plugin.serialization") version "1.9.0" apply false
 }

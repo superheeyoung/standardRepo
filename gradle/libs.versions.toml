@@ -10,6 +10,7 @@ material = "1.11.0"
 constraintlayout = "2.1.4"
 navigationFragmentKtx = "2.7.7"
 navigationUiKtx = "2.7.7"
+org-jetbrains-kotlin-android = "1.8.10"
 retrofit = "2.11.0"
 okhttp3 = "4.12.0"
 coil = "2.6.0"
@@ -59,6 +60,7 @@ jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "k
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt"}
 room = { id = "androidx.room", version.ref = "room"}
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "org-jetbrains-kotlin-android" }
 
 [bundles]
 retrofit = [
