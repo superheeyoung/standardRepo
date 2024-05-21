@@ -25,6 +25,8 @@ class GitHubUserViewModel @Inject constructor(
     private val _favoriteUserList: MutableLiveData<List<GitHubUser>> = MutableLiveData()
     val favoriteUserList: LiveData<List<GitHubUser>> get() = _favoriteUserList
 
+
+
     fun getGitHubUserList() {
         viewModelScope.launch {
             _getGitHubUserList.value = searchRepository.getGitHubUserList("cindy").items
