@@ -1,13 +1,16 @@
 package com.standard.multiviewtyperecyclerview.data.repository
 
 
+import android.util.Log
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.map
+import com.standard.multiviewtyperecyclerview.data.database.FavoriteUserDataBase
 import com.standard.multiviewtyperecyclerview.data.remote.remote.SearchPagingRemoteDataSource
 import com.standard.multiviewtyperecyclerview.data.remote.remote.SearchRemoteDataSource
+import com.standard.multiviewtyperecyclerview.data.remote.remote.SearchRemoteMediator
 import com.standard.multiviewtyperecyclerview.presentation.search.mapper.asGitHubUser
 import com.standard.multiviewtyperecyclerview.presentation.search.mapper.toEntity
 import com.standard.multiviewtyperecyclerview.presentation.search.model.GitHubUser
@@ -17,7 +20,9 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class SearchRepositoryImpl @Inject constructor(
-    private val remoteDataSource: SearchRemoteDataSource
+    private val remoteDataSource: SearchRemoteDataSource,
+    private val dataBase: FavoriteUserDataBase,
+    private val mediator: SearchRemoteMediator
 ) : SearchRepository {
     override suspend fun getGitHubUserList(userName: String) =
         remoteDataSource.getGitHubUser(userName).toEntity()
@@ -37,4 +42,22 @@ class SearchRepositoryImpl @Inject constructor(
             }
         }
     }
+
+    @OptIn(ExperimentalPagingApi::class)
+    override suspend fun getGitHubUserLists(userName: String): Flow<PagingData<GitHubUser>> =
+        Pager(
+            config = PagingConfig(
+                pageSize = 10,
+                initialLoadSize = 10
+            ),
+            remoteMediator = mediator,
+            pagingSourceFactory = {
+                SearchPagingRemoteDataSource(userName, remoteDataSource)
+            }
+        ).flow.map {
+            it.map {
+                Log.d("434434-1",it.toString())
+                it.asGitHubUser()
+            }
+        }
 }

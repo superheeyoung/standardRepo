@@ -1,6 +1,5 @@
 package com.standard.multiviewtyperecyclerview.presentation.search.main
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
@@ -24,11 +23,16 @@ class GitHubUserViewModel @Inject constructor(
     private val _favoriteUserFlow = MutableSharedFlow<List<GitHubUser>>(replay = 1)
     val favoriteUserFlow = _favoriteUserFlow.asSharedFlow()
 
+    private val _usersFlow = MutableStateFlow<List<GitHubUser>>(emptyList())
+    val usersFlow: StateFlow<List<GitHubUser>> = _usersFlow.asStateFlow()
+
     private val queryFlow = MutableSharedFlow<String>()
 
     val pagingDataFlow = queryFlow.flatMapLatest {
-        searchRepository.getPagingGitHubUserList(it)
+        //searchRepository.getPagingGitHubUserList(it)
+        searchRepository.getGitHubUserLists(it)
     }.cachedIn(viewModelScope)
+
 
 
     fun setUserName(userName: String) {
@@ -42,6 +46,12 @@ class GitHubUserViewModel @Inject constructor(
 
         viewModelScope.launch {
             _favoriteUserFlow.emit(favortieUser.toList())
+        }
+    }
+
+    fun getUserList() {
+        viewModelScope.launch {
+            val data = searchRepository.getGitHubUserLists(userName = "cindy")
         }
     }
 

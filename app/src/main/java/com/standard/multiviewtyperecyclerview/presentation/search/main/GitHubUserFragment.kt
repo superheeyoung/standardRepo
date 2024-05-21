@@ -61,8 +61,12 @@ class GitHubUserFragment : Fragment() {
     private fun initViewModel() {
         viewLifecycleOwner.lifecycleScope.launch {
             gitHubUserViewModel.pagingDataFlow.collectLatest {
+                it.map {
+                    Log.d("debug111",it.toString())
+                }
                 gitHubUserPagingAdapter.submitData(it)
             }
+
         }
     }
 
