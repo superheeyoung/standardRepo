@@ -5,13 +5,18 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.paging.map
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.standard.multiviewtyperecyclerview.databinding.FragmentGithubSearchUsersBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class GitHubUserFragment : Fragment() {
@@ -22,16 +27,12 @@ class GitHubUserFragment : Fragment() {
     private var _binding: FragmentGithubSearchUsersBinding? = null
     private val binding get() = _binding!!
 
-    private val gitHubUserViewModel: GitHubUserViewModel by viewModels()
+    private val gitHubUserViewModel: GitHubUserViewModel by lazy {
+        ViewModelProvider(requireActivity())[GitHubUserViewModel::class.java]
+    }
 
-    //TODO activityViewModels 확인
-    //activityViewModels() 사용 시 Activity의 라이프사이클에 의해 생존주기 결정되며 액티비티내에서 같은 데이터 공유
-    private val sharedViewModel : GitHubUserSharedViewModel by activityViewModels()
-
-    private val gitHubUserAdapter: GitHubUserAdapter by lazy {
-        GitHubUserAdapter {
-            gitHubUserViewModel.setFavoriteItem(it)
-        }
+    private val gitHubUserPagingAdapter = GitHubUserPagingAdapter {
+        gitHubUserViewModel.setFavoriteUser(it)
     }
 
     override fun onCreateView(
@@ -50,21 +51,18 @@ class GitHubUserFragment : Fragment() {
     }
 
     private fun initView() = with(binding) {
-        btnSearch.setOnClickListener {
-            gitHubUserViewModel.getGitHubUserList()
+        binding.rvGithubUsers.adapter = gitHubUserPagingAdapter
+
+        binding.etSearch.doAfterTextChanged {
+            gitHubUserViewModel.setUserName(binding.etSearch.text.trim().toString())
         }
     }
 
     private fun initViewModel() {
-        gitHubUserViewModel.getGitHubUserList.observe(viewLifecycleOwner) {
-            gitHubUserAdapter.gitHubUserList = it
-            with(binding.rvGithubUsers) {
-                adapter = gitHubUserAdapter
+        viewLifecycleOwner.lifecycleScope.launch {
+            gitHubUserViewModel.pagingDataFlow.collectLatest {
+                gitHubUserPagingAdapter.submitData(it)
             }
-        }
-
-        gitHubUserViewModel.favoriteUserList.observe(viewLifecycleOwner) {
-            sharedViewModel.setFavoriteList(it)
         }
     }
 

@@ -18,3 +18,11 @@ fun List<GitHubUserResponse>.asGitHubUserEntity(): List<GitHubUser> {
         )
     }
 }
+
+fun GitHubUserResponse.asGitHubUser() : GitHubUser{
+    return GitHubUser(
+        avatarUrl,
+        loginName,
+        id
+    )
+}

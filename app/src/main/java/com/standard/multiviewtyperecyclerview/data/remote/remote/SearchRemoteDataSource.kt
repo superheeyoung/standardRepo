@@ -8,9 +8,8 @@ interface SearchRemoteDataSource {
     @GET("/search/users")
     suspend fun getGitHubUser(
         @Query("q") name: String,
-        @Query("page") page: Int = 1,
-        @Query("per_page") perPage: Int = 100
+        @Query("page") page: Int = 0,
+        @Query("per_page") perPage: Int = 0
     ) : GitHubUserListResponse
 
-    //TODO api를 사용하는 function 추가 하면 됨!
 }

@@ -24,13 +24,6 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_title"
         app:layout_constraintStart_toStartOf="parent"/>
 
-    <Button
-        android:id="@+id/btn_search"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="찾기"
-        app:layout_constraintTop_toTopOf="@+id/et_search"
-        app:layout_constraintStart_toEndOf="@+id/et_search"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_github_users"

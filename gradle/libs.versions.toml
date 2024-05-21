@@ -17,6 +17,7 @@ navigation = "2.7.7"
 hilt = "2.48"
 room = "2.6.1"
 ksp = "1.9.0-1.0.13"
+paging = "3.3.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -46,6 +47,10 @@ hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", v
 room-runtime = { group = "androidx.room", name = "room-ktx", version.ref = "room"}
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room"}
 room-paging = { group = "androidx.room", name = "room-paging", version.ref = "room"}
+
+#paging
+paging-runtime = { group = "androidx.paging", name = "paging-runtime", version.ref = "paging"}
+paging-common = {group = "androidx.paging", name = "paging-common", version.ref = "paging"}
 
 
 [plugins]
