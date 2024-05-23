@@ -23,14 +23,6 @@ fun List<GitHubUserResponse>.asGitHubUserEntity(): List<GitHubUser> {
     }
 }
 
-/*fun GitHubUserResponse.asGitHubUser() : GitHubUser{
-    return GitHubUser(
-        avatarUrl,
-        loginName,
-        id
-    )
-}*/
-
 fun GitHubUserResponse.asGitHubUser() : GitHubUser {
    // val contentParam = Json.decodeFromString<ContentParam>(content)
     return GitHubUser(
@@ -38,14 +30,4 @@ fun GitHubUserResponse.asGitHubUser() : GitHubUser {
         this.loginName,
         this.id
     )
-}
-
-@Serializable
-data class ContentParam(
-    val text:String,
-    val images:List<String>
-){
-    fun toJson():String{
-        return Json.encodeToString(this)
-    }
 }

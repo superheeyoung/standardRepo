@@ -12,12 +12,9 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 val BASE_URL = "https://api.github.com/"
-//Module : external library를 바인딩 정보를 제공할 때 사용
-//@InstallIn(SingletonComponent::class) -> object 클래스가 힐트에 사용될지 알려주기 위해 힐트모듈 사용
 @Module
 @InstallIn(SingletonComponent::class)
 internal object RetrofitClient {
-    //@Provides : room, retrofit과 같은 외부 라이브러리에서 제공되는 클래스여서 프로젝트 내에서 소유할 수 없는 경우 or builder 패턴을 통해 인스턴스를 생성해야 하는 경우
     @Provides
     fun provideOkHttpClient(): OkHttpClient {
         val loggingInterceptor = HttpLoggingInterceptor()

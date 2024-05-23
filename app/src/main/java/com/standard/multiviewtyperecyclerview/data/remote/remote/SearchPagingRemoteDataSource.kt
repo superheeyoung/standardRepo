@@ -6,6 +6,7 @@ import com.standard.multiviewtyperecyclerview.data.remote.model.GitHubUserRespon
 
 class SearchPagingRemoteDataSource (private val query : String,
     private val searchRemoteDataSource : SearchRemoteDataSource): PagingSource<Int, GitHubUserResponse>() {
+
     override fun getRefreshKey(state: PagingState<Int, GitHubUserResponse>): Int? {
         return state.anchorPosition?.let {
             val closestPageToPosition = state.closestPageToPosition(it)
@@ -15,7 +16,7 @@ class SearchPagingRemoteDataSource (private val query : String,
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, GitHubUserResponse> {
-        val start = params.key ?: defaultStart
+        val start = params.key ?: defaultStart //Key -> 현재 페이지, 다음에 로드할 페이지의 시작점 정함
 
         return try {
             val response = searchRemoteDataSource.getGitHubUser(query, params.loadSize, start)

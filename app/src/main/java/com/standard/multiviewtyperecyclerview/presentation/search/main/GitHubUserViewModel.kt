@@ -14,26 +14,27 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-//Inject constructor -> 생성자에 주입, 생성자에 힐트가 인스턴스 제공
 @HiltViewModel
 class GitHubUserViewModel @Inject constructor(
     private val searchRepository: SearchRepository,
     private val cacheRepository: CacheRepository
 ) : ViewModel() {
     val favortieUser = mutableSetOf<GitHubUser>()
-    private val _favoriteUserFlow = MutableSharedFlow<List<GitHubUser>>(replay = 1)
+    private val _favoriteUserFlow = MutableSharedFlow<List<GitHubUser>>(replay = 1) //구독자에게 전달되는 데이터 수
     val favoriteUserFlow = _favoriteUserFlow.asSharedFlow()
-
-    private val _usersFlow = MutableStateFlow<List<GitHubUser>>(emptyList())
-    val usersFlow: StateFlow<List<GitHubUser>> = _usersFlow.asStateFlow()
 
     private val queryFlow = MutableSharedFlow<String>()
 
     val pagingDataFlow = queryFlow.flatMapLatest {
+        /*
+        * TODO
+        *  1.searchRepository.getGitHubUserLists(it) : RemoteMediator 사용
+        *  2.searchRepository.getPagingGitHubUserList(it) : PagingSource 사용
+        *
+        * */
         //searchRepository.getPagingGitHubUserList(it)
        searchRepository.getGitHubUserLists(it)
     }.cachedIn(viewModelScope)
-
 
 
     fun setUserName(userName: String) {

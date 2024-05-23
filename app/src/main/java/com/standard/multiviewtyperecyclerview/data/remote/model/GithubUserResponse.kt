@@ -10,7 +10,6 @@ data class GitHubUserListResponse(
 )
 
 @Entity
-@Serializable
 data class GitHubUserResponse(
     @PrimaryKey(autoGenerate = true)val uid:Long,
     @SerializedName("avatar_url") val avatarUrl: String,

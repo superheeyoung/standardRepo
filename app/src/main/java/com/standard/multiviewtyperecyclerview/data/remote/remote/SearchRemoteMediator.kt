@@ -17,7 +17,6 @@ import javax.inject.Inject
 
 @OptIn(ExperimentalPagingApi::class)
 class SearchRemoteMediator @Inject constructor(
-    //private val userName: String,
     private val database: FavoriteUserDataBase,
     private val searchRemoteDataSource: SearchRemoteDataSource
 ) : RemoteMediator<Int, GitHubUserResponse>() {
@@ -30,6 +29,7 @@ class SearchRemoteMediator @Inject constructor(
         state: PagingState<Int, GitHubUserResponse>
     ): MediatorResult {
         val remoteKey = when (loadType) {
+            //새로고침
             LoadType.REFRESH -> {
                 null
             }
@@ -39,18 +39,17 @@ class SearchRemoteMediator @Inject constructor(
                 return MediatorResult.Success(true)
             }
 
-            //마지막 페이지
+            //마지막 페이지 이후의 데이터 로드
             LoadType.APPEND -> {
                 remoteKeyDao.getNextKey()
             }
         }
 
         try {
-            val page = remoteKey?.nextPage ?: 1
-            val loadSize = 10
-            val response = searchRemoteDataSource.getGitHubUser("cindy", page, 20)
+            val page = remoteKey?.nextPage ?: 1 //pagination
+            val loadSize = 20
+            val response = searchRemoteDataSource.getGitHubUser("cindy", page, loadSize)
             val userList = response.items
-            Log.d("debug3444", userList.toString())
             database.withTransaction {
                 if (loadType == LoadType.REFRESH) {
                     userDao.deleteAll()
